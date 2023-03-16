@@ -1,60 +1,31 @@
+'''
+Rock Paper Scissors game v2.
+
+'''
+
 import random
 
+table = {
+    "rock": { "rock": 0,  "paper": -1,   "scissors": 1},
+    "paper": { "rock": 1,   "paper":0,   "scissors":-1},
+    "scissors": {"rock": -1,   "paper":1,   "scissors": 0}
+}
 
-rock = '''
-    _______
----'   ____)
-      (_____)
-      (_____)
-      (____)
----.__(___)
-'''
+choices = ["rock", "paper", "scissors"]
 
-paper = '''
-    _______
----'   ____)____
-          ______)
-          _______)
-         _______)
----.__________)
-'''
+while (True):
+    user_choice = int(input("Rock, paper, scissors? (1,2,3) "))
+    if (user_choice in [1,2,3]):
+        break
 
-scissors = '''
-    _______
----'   ____)____
-          ______)
-       __________)
-      (____)
----.__(___)
-'''
+user_choice = choices[user_choice-1]
+bot_choice = random.choice(choices)
 
+print(f"You: {user_choice}")
+print(f"Bot: {bot_choice}")
 
-game=[rock,paper,scissors]
+result = table.get(user_choice).get(bot_choice)
 
-
-
-user = int(input("What do you choose? Type 0 for Rock, 1 for Paper or 2 for Scissors.\n"))
-print(f"{game[user]}  user choice ")
-
-
-number=random.randint(0,2)
-
-lenth=len(game)-number
-
-bot=game[lenth]
-print(f" {bot} bot choice  ")
-
-first_condition=   user==0 and lenth==2 or user==2 and lenth==1 or user==1 and lenth==0
-
-second_condition= lenth== user
-
-if second_condition :
-     print("draw")
-
-if first_condition:
-  print("you win :)")
-
-
-if first_condition or second_condition==False:
-        print("you lose :(")
-
+if result==0:print("tied game")
+elif result==1:print("win")
+elif result==-1:print("lost")
